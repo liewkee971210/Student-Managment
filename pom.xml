@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.18</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
+  <!-- Put in your unique group ID like com.origin.APPLICATION_NAME -->
+  <groupId>com.origin.template</groupId>
+  <artifactId>origin-template</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>${packaging.type}</packaging>
+  <!-- Name of application. Doesn't matter -->
+  <name>Origin Template</name>
+  <!-- Descriptin of what your application does-->
+  <description>
+    Template project
+	</description>
+  <properties>
+    <java.version>8</java.version>
+  </properties>
+  <profiles>
+    <profile>
+      <id>deployment</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <packaging.type>war</packaging.type>
+        <maven.test.skip>true</maven.test.skip>
+      </properties>
+      <dependencies><!--
+        https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+        <dependency>
+          <groupId>com.fasterxml.jackson.dataformat</groupId>
+          <artifactId>jackson-dataformat-xml</artifactId>
+          <version>2.16.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+        <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.0.1</version>
+          <scope>provided</scope>
+        </dependency>
+        <!--
+				https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+          <exclusions>
+            <exclusion>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>development</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <packaging.type>jar</packaging.type>
+      </properties>
+      <dependencies>
+        <!--
+				https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+          <scope>test</scope>
+          <exclusions>
+            <exclusion>
+              <groupId>com.vaadin.external.google</groupId>
+              <artifactId>android-json</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+        <!--
+				https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--
+				https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        <!--
+				https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+  <dependencies>
+    <dependency>
+      <groupId>origin-libraries.core</groupId>
+      <artifactId>utilities</artifactId>
+      <version>1.0.0-jre8</version>
+    </dependency>
+    <dependency>
+      <groupId>origin-libraries.common-models</groupId>
+      <artifactId>origin-standards</artifactId>
+      <version>1.0.0-jre8</version>
+    </dependency>
+    <dependency>
+      <groupId>origin-libraries.core</groupId>
+      <artifactId>security</artifactId>
+      <version>1.0.5-jre8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+  </dependencies>
+  <repositories>
+    <!-- Don't change unless you know what you are doing -->
+    <repository>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.originiscloud.com/api/v4/groups/51/-/packages/maven</url>
+    </repository>
+  </repositories>
+  <build>
+    <!-- Name of your WAR file.  
+		When deployed in Payara, by default your application will be in :8080/Name -->
+    <finalName>template</finalName>
+    <plugins>
+      <!-- display active profile in compile phase -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-help-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <?m2e execute onConfiguration?>
+            <id>show-profiles</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>active-profiles</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

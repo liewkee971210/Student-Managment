@@ -1,0 +1,52 @@
+.scrollable-div {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 100vh;
+    padding: 8px;
+}
+
+.scrollable-panel {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.custom-tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    max-height: 128px;
+    max-width: 128px;
+    cursor: pointer;
+}
+
+.custom-tooltip-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px dotted black;
+    max-height: 128px;
+    max-width: 128px;
+}
+
+.custom-tooltip .custom-tooltiptext,
+.custom-tooltip-flex .custom-tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.custom-tooltip:hover .custom-tooltiptext,
+.custom-tooltip-flex:hover .custom-tooltiptext {
+    visibility: visible;
+}
+.object-fit-scale {
+    object-fit: scale-down;
+}

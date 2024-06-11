@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "origin.application.module",
+      "type": "java.lang.String",
+      "description": "Context path of this application without the slash."
+    }
+  ]
+}

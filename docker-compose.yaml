@@ -1,0 +1,12 @@
+services:
+  master-config:
+    image: asia-southeast1-docker.pkg.dev/sunlit-amulet-332204/origin-his-tools/template:latest
+    build:
+      context: ./
+      dockerfile: ./Dockerfiles/dev.dockerfile
+    environment:
+      DATASOURCE_URL: ${DATASOURCE_URL}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - 8080:8080
